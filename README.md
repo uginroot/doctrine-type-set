@@ -5,7 +5,7 @@ composer require uginroot/doctrine-type-set:^1.0
 
 # Using
 
-Create set class
+#### Create set class
 ```php
 namespace App\Type;
 
@@ -19,7 +19,7 @@ class RoleSetType extends SetAbstract{
 }
 ```
 
-Create doctrine type class
+#### Create doctrine type class
 ```php
 namespace App\DoctrineType;
 
@@ -34,7 +34,7 @@ class RoleSetDoctrineType extends AbstractDoctrineTypeSet{
 }
 ```
 
-Register doctrine type in config/packages/doctrine.yaml file
+#### Register doctrine type in config/packages/doctrine.yaml file
 ```yaml
 doctrine:
     dbal:
@@ -42,7 +42,7 @@ doctrine:
             RoleSetDoctrineType: App\DoctrineType\RoleSetDoctrineType
 ```
 
-Add mapping data to entity
+#### Add mapping data to entity
 ```php
 namespace App\Entity;
 
@@ -110,7 +110,7 @@ class User{
 }
 ```
 
-Use set immutable instead set if you need
+#### Use set immutable instead set if you need
 ```php
 use Uginroot\DoctrineTypeSet\AbstractDoctrineTypeSetImmutable;
 use Uginroot\PhpSet\SetImmutableAbstract;

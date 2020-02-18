@@ -10,7 +10,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "Uginroot\\DoctrineTypeSet\\": "src/",
+      "Uginroot\\DoctrineTypeSet\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Uginroot\\DoctrineTypeSet\\Test\\": "test/"
     }
   },

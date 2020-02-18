@@ -1,7 +1,6 @@
 {
   "name": "uginroot/doctrine-type-set",
   "description": "Php doctrine type set",
-  "minimum-stability": "dev",
   "license": "MIT",
   "version": "1.0",
   "authors": [

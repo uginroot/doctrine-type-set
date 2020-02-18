@@ -18,7 +18,7 @@
   "require": {
     "php": "^7.4",
     "uginroot/php-set": "dev-master",
-    "doctrine/orm": "^3.0@dev"
+    "doctrine/orm": "~2.0|~3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.1@dev"

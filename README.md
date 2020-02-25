@@ -1,6 +1,6 @@
 # Install
 ```bash
-composer require uginroot/doctrine-type-set:^1.6
+composer require uginroot/doctrine-type-set:^2.0
 ```
 
 # Using
@@ -108,10 +108,4 @@ class User{
         return $role === null ? [] : $role->getNames();
     }
 }
-```
-
-#### Use set immutable instead set if you need
-```php
-use Uginroot\DoctrineTypeSet\AbstractDoctrineTypeSetImmutable;
-use Uginroot\PhpSet\SetImmutableAbstract;
 ```

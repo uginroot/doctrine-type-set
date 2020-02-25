@@ -118,7 +118,6 @@ abstract class AbstractDoctrineTypeSet extends Type
             throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
         }
 
-        $values = array_map(fn(string $name) => call_user_func([$setClass, 'getValue'], $name), $namesClear);
-        return new $setClass($values);
+        return $setClass::createFromNames($namesClear);
     }
 }

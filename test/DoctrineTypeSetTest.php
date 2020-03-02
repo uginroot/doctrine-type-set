@@ -16,7 +16,7 @@ use Uginroot\DoctrineTypeSet\Exceptions\UnexpectedExtendsException;
 use Uginroot\DoctrineTypeSet\Exceptions\UnsupportedPlatformException;
 use Uginroot\DoctrineTypeSet\Test\Sets\Animals;
 use Uginroot\DoctrineTypeSet\Test\Types\AnimalsType;
-use Uginroot\PhpSet\SetInterface;
+use Uginroot\PhpSet\SetAbstract;
 
 class DoctrineTypeSetTest extends TestCase
 {
@@ -47,6 +47,7 @@ class DoctrineTypeSetTest extends TestCase
 
     /**
      * @return array
+     * @throws ReflectionException
      */
     public function providerConvertToDataBaseValue():array
     {
@@ -71,12 +72,13 @@ class DoctrineTypeSetTest extends TestCase
     /**
      * @param $expected
      * @param $value
+     * @throws ReflectionException
      * @dataProvider providerConvertToDataBaseValue
      */
     public function testConvertToPhpValue($expected, $value)
     {
         $result = $this->type->convertToPHPValue($value, new MySqlPlatform());
-        if($expected instanceof SetInterface){
+        if($expected instanceof SetAbstract){
             $this->assertTrue($expected->equal($result));
             $this->assertSame(get_class($result), get_class($expected));
         } else {
@@ -85,7 +87,7 @@ class DoctrineTypeSetTest extends TestCase
     }
 
     /**
-     * @throws DBALException
+     * @throws ReflectionException
      */
     public function testGetSqlDeclaration()
     {
@@ -119,7 +121,7 @@ class DoctrineTypeSetTest extends TestCase
     }
 
     /**
-     * @throws DBALException
+     * @throws ReflectionException
      */
     public function testUnsupportedPlatformExceptionDeclaration()
     {
@@ -128,7 +130,10 @@ class DoctrineTypeSetTest extends TestCase
         $this->type->getSQLDeclaration([], $platform);
     }
 
-    public function testUnsupportedPlatformExceptionToPhpValue()
+    /**
+     * @throws ReflectionException
+     */
+    public function testUnsupportedPlatformExceptionToPhpValue():void
     {
         $platform = new DB2Platform;
         $this->expectException(UnsupportedPlatformException::class);

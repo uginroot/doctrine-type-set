@@ -49,12 +49,13 @@ abstract class AbstractDoctrineTypeSet extends Type
      * @param array $fieldDeclaration
      * @param AbstractPlatform $platform
      * @return string
+     * @throws ReflectionException
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform):string
     {
         /** @var SetAbstract $setClass */
         $setClass = $this->getSetClass();
-        $names = call_user_func([$setClass, 'getNameVariants']);
+        $names = $setClass::getChoice()->getNames();
         sort($names);
         $namesQuotes = array_map(fn(string $name) => sprintf("'%s'", $name), $names);
         $namesString = implode(',', $namesQuotes);

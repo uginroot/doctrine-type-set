@@ -38,9 +38,9 @@ abstract class AbstractDoctrineTypeSet extends Type
     {
         if ($platform instanceof MySqlPlatform) {
             return true;
-        }else {
-            throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
         }
+
+        throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
     }
 
 
@@ -62,9 +62,9 @@ abstract class AbstractDoctrineTypeSet extends Type
 
         if ($platform instanceof MySqlPlatform) {
             return sprintf('SET(%s)', $namesString);
-        }else {
-            throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
         }
+
+        throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
     }
 
     /**
@@ -98,11 +98,17 @@ abstract class AbstractDoctrineTypeSet extends Type
 
         if ($platform instanceof MySqlPlatform) {
             return implode(',', $names);
-        }else {
-            throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
         }
+
+        throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
     }
 
+    /**
+     * @param mixed $value
+     * @param AbstractPlatform $platform
+     * @return mixed|SetAbstract
+     * @throws ReflectionException
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         /** @var SetAbstract $setClass */

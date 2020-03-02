@@ -12,10 +12,10 @@ namespace App\Type;
 use Uginroot\PhpSet\SetAbstract;
 
 class RoleSetType extends SetAbstract{
-    const ROLE_USER = 'user';
-    const ROLE_AUTHOR = 'author';
-    const ROLE_MODERATOR = 'moderator';
-    const ROLE_ADMIN = 'admin';
+    public const ROLE_USER = 'user';
+    public const ROLE_AUTHOR = 'author';
+    public const ROLE_MODERATOR = 'moderator';
+    public const ROLE_ADMIN = 'admin';
 }
 ```
 

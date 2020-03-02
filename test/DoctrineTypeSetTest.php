@@ -64,7 +64,7 @@ class DoctrineTypeSetTest extends TestCase
      * @param $expected
      * @dataProvider providerConvertToDataBaseValue
      */
-    public function testConvertToDataBaseValue($value, $expected)
+    public function testConvertToDataBaseValue($value, $expected):void
     {
         $this->assertSame($expected, $this->type->convertToDatabaseValue($value, new MySqlPlatform()));
     }
@@ -75,7 +75,7 @@ class DoctrineTypeSetTest extends TestCase
      * @throws ReflectionException
      * @dataProvider providerConvertToDataBaseValue
      */
-    public function testConvertToPhpValue($expected, $value)
+    public function testConvertToPhpValue($expected, $value):void
     {
         $result = $this->type->convertToPHPValue($value, new MySqlPlatform());
         if($expected instanceof SetAbstract){
@@ -89,14 +89,14 @@ class DoctrineTypeSetTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testGetSqlDeclaration()
+    public function testGetSqlDeclaration():void
     {
         $expected = sprintf("SET('%s','%s','%s','%s')", 'Cat', 'Dog', 'Lion', 'Wolf');
         $actual = $this->type->getSQLDeclaration([], new MySqlPlatform());
         $this->assertSame($expected, $actual);
     }
 
-    public function testRequiresSqlCommentHint()
+    public function testRequiresSqlCommentHint():void
     {
         $this->assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
     }
@@ -104,7 +104,7 @@ class DoctrineTypeSetTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testUnexpectedExtendsException()
+    public function testUnexpectedExtendsException():void
     {
         $this->expectException(UnexpectedExtendsException::class);
         $class = new ReflectionClass($this->type);
@@ -113,7 +113,7 @@ class DoctrineTypeSetTest extends TestCase
         $method->invokeArgs($this->type, [stdClass::class]);
     }
 
-    public function testUnsupportedPlatformExceptionHint()
+    public function testUnsupportedPlatformExceptionHint():void
     {
         $platform = new DB2Platform;
         $this->expectException(UnsupportedPlatformException::class);
@@ -123,7 +123,7 @@ class DoctrineTypeSetTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testUnsupportedPlatformExceptionDeclaration()
+    public function testUnsupportedPlatformExceptionDeclaration():void
     {
         $platform = new DB2Platform;
         $this->expectException(UnsupportedPlatformException::class);
@@ -140,7 +140,7 @@ class DoctrineTypeSetTest extends TestCase
         $this->type->convertToPHPValue('Dog,Cat', $platform);
     }
 
-    public function testUnsupportedPlatformExceptionToDatabaseValue()
+    public function testUnsupportedPlatformExceptionToDatabaseValue():void
     {
         $platform = new DB2Platform;
         $this->expectException(UnsupportedPlatformException::class);

@@ -1,6 +1,6 @@
 # Install
 ```bash
-composer require uginroot/doctrine-type-set:^2.1
+composer require uginroot/doctrine-type-set:^2.2
 ```
 
 # Using
@@ -11,7 +11,7 @@ namespace App\Type;
 
 use Uginroot\PhpSet\SetAbstract;
 
-class RoleSetType extends SetAbstract{
+class Role extends SetAbstract{
     public const ROLE_USER = 'user';
     public const ROLE_AUTHOR = 'author';
     public const ROLE_MODERATOR = 'moderator';
@@ -23,13 +23,13 @@ class RoleSetType extends SetAbstract{
 ```php
 namespace App\DoctrineType;
 
-use Uginroot\DoctrineTypeSet\AbstractDoctrineTypeSet;
-use App\Type\RoleSetType;
+use Uginroot\DoctrineTypeSet\SetDoctrineTypeAbstract;
+use App\Type\Role;
 
-class RoleSetDoctrineType extends AbstractDoctrineTypeSet{
+class RoleDoctrineType extends SetDoctrineTypeAbstract{
 
     public function getClass() : string{
-        return RoleSetType::class;
+        return Role::class;
     }
 }
 ```
@@ -39,7 +39,7 @@ class RoleSetDoctrineType extends AbstractDoctrineTypeSet{
 doctrine:
     dbal:
         types:
-            RoleSetDoctrineType: App\DoctrineType\RoleSetDoctrineType
+            RoleDoctrineType: App\DoctrineType\RoleDoctrineType
 ```
 
 #### Add mapping data to entity
@@ -47,7 +47,7 @@ doctrine:
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Uginroot\PhpSet\SetAbstract;
+use App\Type\Role;
 
 /**
  * User
@@ -67,10 +67,10 @@ class User{
     private ?int $id;
 
     /**
-    * @var SetAbstract
-    * @ORM\Column(name="role", type="RoleSetDoctrineType", nullable=true)
+    * @var Role
+    * @ORM\Column(name="role", type="RoleDoctrineType", nullable=true)
     */
-    private ?SetAbstract $role;
+    private ?Role $role;
     
     /**
      * @return int
@@ -81,18 +81,18 @@ class User{
     }
 
     /**
-     * @return SetAbstract
+     * @return Role
      */
-    public  function getRole(): ?SetAbstract
+    public  function getRole(): ?Role
     {
         return $this->role;
     }
 
     /**
-     * @param SetAbstract $role
+     * @param Role $role
      * @return $this
      */
-    public function setRole(SetAbstract $role):self
+    public function setRole(Role $role):self
     {
         $this->role = $role;
         return $this;
@@ -105,7 +105,7 @@ class User{
     public function getRoles():array
     {
         $role = $this->getRole();
-        return $role === null ? [] : $role->getNames();
+        return $role === null ? [] : $role->getChoice()->getNames();
     }
 }
 ```

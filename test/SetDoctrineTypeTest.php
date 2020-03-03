@@ -11,16 +11,16 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 use stdClass;
-use Uginroot\DoctrineTypeSet\AbstractDoctrineTypeSet;
+use Uginroot\DoctrineTypeSet\SetDoctrineTypeAbstract;
 use Uginroot\DoctrineTypeSet\Exceptions\UnexpectedExtendsException;
 use Uginroot\DoctrineTypeSet\Exceptions\UnsupportedPlatformException;
 use Uginroot\DoctrineTypeSet\Test\Sets\Animals;
-use Uginroot\DoctrineTypeSet\Test\Types\AnimalsType;
+use Uginroot\DoctrineTypeSet\Test\Types\AnimalsDoctrineType;
 use Uginroot\PhpSet\SetAbstract;
 
-class DoctrineTypeSetTest extends TestCase
+class SetDoctrineTypeTest extends TestCase
 {
-    private ?AbstractDoctrineTypeSet $type;
+    private ?SetDoctrineTypeAbstract $type;
 
     /**
      * @throws DBALException
@@ -28,7 +28,7 @@ class DoctrineTypeSetTest extends TestCase
      */
     public static function setUpBeforeClass():void
     {
-        $class = new ReflectionClass(AnimalsType::class);
+        $class = new ReflectionClass(AnimalsDoctrineType::class);
         Type::addType($class->getShortName(), $class->getName());
     }
 
@@ -38,9 +38,9 @@ class DoctrineTypeSetTest extends TestCase
      */
     protected function setUp():void
     {
-        $class = new ReflectionClass(AnimalsType::class);
+        $class = new ReflectionClass(AnimalsDoctrineType::class);
         $type = Type::getType($class->getShortName());
-        if($type instanceof AbstractDoctrineTypeSet){
+        if($type instanceof SetDoctrineTypeAbstract){
             $this->type = $type;
         }
     }

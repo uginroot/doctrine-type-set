@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Uginroot\DoctrineTypeSet;
 
-
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Types\Type;
@@ -13,7 +12,7 @@ use Uginroot\DoctrineTypeSet\Exceptions\UnexpectedExtendsException;
 use Uginroot\DoctrineTypeSet\Exceptions\UnsupportedPlatformException;
 use Uginroot\PhpSet\SetAbstract;
 
-abstract class AbstractDoctrineTypeSet extends Type
+abstract class SetDoctrineTypeAbstract extends Type
 {
     private ?string $setClass = null;
 

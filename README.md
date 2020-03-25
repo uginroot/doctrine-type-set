@@ -4,9 +4,8 @@ composer require uginroot/doctrine-type-set:^2.2
 ```
 
 # Using
-
-#### Create set class
 ```php
+// Create set class
 namespace App\Type;
 
 use Uginroot\PhpSet\SetAbstract;
@@ -17,14 +16,11 @@ class Role extends SetAbstract{
     public const ROLE_MODERATOR = 'moderator';
     public const ROLE_ADMIN = 'admin';
 }
-```
 
-#### Create doctrine type class
-```php
+// Create doctrine type class
 namespace App\DoctrineType;
 
 use Uginroot\DoctrineTypeSet\SetDoctrineTypeAbstract;
-use App\Type\Role;
 
 class RoleDoctrineType extends SetDoctrineTypeAbstract{
 
@@ -32,22 +28,11 @@ class RoleDoctrineType extends SetDoctrineTypeAbstract{
         return Role::class;
     }
 }
-```
 
-#### Register doctrine type in config/packages/doctrine.yaml file
-```yaml
-doctrine:
-    dbal:
-        types:
-            RoleDoctrineType: App\DoctrineType\RoleDoctrineType
-```
-
-#### Add mapping data to entity
-```php
+// Add mapping data to entity
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Type\Role;
 
 /**
  * User
@@ -64,13 +49,13 @@ class User{
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private $id;
 
     /**
-    * @var Role
+    * @var Role|null
     * @ORM\Column(name="role", type="RoleDoctrineType", nullable=true)
     */
-    private ?Role $role;
+    private $role;
     
     /**
      * @return int
@@ -105,7 +90,16 @@ class User{
     public function getRoles():array
     {
         $role = $this->getRole();
-        return $role === null ? [] : $role->getChoice()->getNames();
+        return $role === null ? [] : $role->getNames();
     }
 }
+```
+
+## Register doctrine type
+```yaml
+# config/packages/doctrine.yaml
+doctrine:
+    dbal:
+        types:
+            Role: App\DoctrineType\RoleDoctrineType
 ```

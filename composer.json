@@ -23,8 +23,4 @@
     "doctrine/orm": "~2.0|~3.0",
     "uginroot/php-set": "^2.1"
   }
-  ,
-  "require-dev": {
-    "roave/security-advisories": "dev-master"
-  }
 }

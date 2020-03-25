@@ -14,7 +14,10 @@ use Uginroot\PhpSet\SetAbstract;
 
 abstract class SetDoctrineTypeAbstract extends Type
 {
-    private ?string $setClass = null;
+    /**
+     * @var string|null
+     */
+    private $setClass;
 
     abstract public function getClass():string;
 
@@ -56,7 +59,10 @@ abstract class SetDoctrineTypeAbstract extends Type
         $setClass = $this->getSetClass();
         $names = $setClass::getChoice()->getNames();
         sort($names);
-        $namesQuotes = array_map(fn(string $name) => sprintf("'%s'", $name), $names);
+        $namesQuotes = [];
+        foreach ($names as $name){
+            $namesQuotes[] = sprintf("'%s'", $name);
+        }
         $namesString = implode(',', $namesQuotes);
 
         if ($platform instanceof MySqlPlatform) {

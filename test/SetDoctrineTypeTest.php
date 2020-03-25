@@ -20,7 +20,10 @@ use Uginroot\PhpSet\SetAbstract;
 
 class SetDoctrineTypeTest extends TestCase
 {
-    private ?SetDoctrineTypeAbstract $type;
+    /**
+     * @var SetDoctrineTypeAbstract|null
+     */
+    private $type;
 
     /**
      * @throws DBALException

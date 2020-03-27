@@ -132,4 +132,18 @@ abstract class SetDoctrineTypeAbstract extends Type
 
         return $setClass::createFromNames($namesClear);
     }
+
+    public function getMappedDatabaseTypes(AbstractPlatform $platform): array
+    {
+        $types = parent::getMappedDatabaseTypes($platform);
+
+        if ($platform instanceof MySqlPlatform) {
+            $platformType = 'set';
+            if(!in_array($platformType, $types)){
+                $types[] = $platformType;
+            }
+        }
+
+        return $types;
+    }
 }

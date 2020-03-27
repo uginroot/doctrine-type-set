@@ -149,4 +149,11 @@ class SetDoctrineTypeTest extends TestCase
         $this->expectException(UnsupportedPlatformException::class);
         $this->type->convertToDatabaseValue(new Animals(), $platform);
     }
+
+    public function testGetMappedDatabaseTypes():void
+    {
+        $platform = new MySqlPlatform();
+        $types = $this->type->getMappedDatabaseTypes($platform);
+        $this->assertContains('set', $types);
+    }
 }

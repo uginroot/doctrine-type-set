@@ -56,8 +56,8 @@ class SetDoctrineTypeTest extends TestCase
     {
         return [
             'null' => [null, null],
-            'normal' => [new Animals(Animals::Cat, Animals::Dog), 'Cat,Dog'],
-            'random' => [new Animals(Animals::Dog, Animals::Cat), 'Cat,Dog'],
+            'normal' => [new Animals(Animals::Cat, Animals::Dog, Animals::Lion, Animals::Wolf), 'Cat,Dog,Lion,Wolf'],
+            'random' => [new Animals(Animals::Wolf, Animals::Dog, Animals::Cat, Animals::Lion), 'Cat,Dog,Lion,Wolf'],
             'empty' => [new Animals(), ''],
         ];
     }

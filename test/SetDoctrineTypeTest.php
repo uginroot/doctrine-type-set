@@ -156,4 +156,12 @@ class SetDoctrineTypeTest extends TestCase
         $types = $this->type->getMappedDatabaseTypes($platform);
         $this->assertContains('set', $types);
     }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetName():void
+    {
+        $this->assertSame('Animals', $this->type->getName());
+    }
 }

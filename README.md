@@ -1,6 +1,6 @@
 # Install
 ```bash
-composer require uginroot/doctrine-type-set:^2.4
+composer require uginroot/doctrine-type-set:^2.5
 ```
 
 # Using

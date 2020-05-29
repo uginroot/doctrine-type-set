@@ -21,6 +21,6 @@
   "require": {
     "php": "^7.2",
     "doctrine/orm": "~2.0|~3.0",
-    "uginroot/php-set": "^2.2"
+    "uginroot/php-set": "^2.6"
   }
 }

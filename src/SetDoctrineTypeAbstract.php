@@ -51,7 +51,6 @@ abstract class SetDoctrineTypeAbstract extends Type
      * @param array $fieldDeclaration
      * @param AbstractPlatform $platform
      * @return string
-     * @throws ReflectionException
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform):string
     {
@@ -112,7 +111,6 @@ abstract class SetDoctrineTypeAbstract extends Type
      * @param mixed $value
      * @param AbstractPlatform $platform
      * @return mixed|SetAbstract
-     * @throws ReflectionException
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -130,7 +128,7 @@ abstract class SetDoctrineTypeAbstract extends Type
             throw new UnsupportedPlatformException(sprintf('Platform %s not support', get_class($platform)));
         }
 
-        return $setClass::createFromNames($namesClear);
+        return $setClass::constructorFromNames($namesClear);
     }
 
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
